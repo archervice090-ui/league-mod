@@ -1,0 +1,18 @@
+name: Compilar league-mod Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Compilar binario
+        run: cargo build --release --bin league-mod
+      - name: Salvar executavel
+        uses: actions/upload-artifact@v4
+        with:
+          name: league-mod-windows
+          path: target/release/league-mod.exe
